@@ -109,6 +109,3 @@ python cli.py <command> [options]
 
 ---
 
-For further configurations, modify `config.py` or update `docker-compose.yml` as needed.
-
-
