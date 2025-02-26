@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  backend:
+    image: your-backend-image:latest  # Replace with actual image name
+    ports:
+      - "5000:5000"
+    environment:
+      - POSTGRES_DB=pastebin
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=secret
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  db:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_DB: pastebin
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secret
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin -d pastebin"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+
+  redis:
+    image: redis:latest
+    restart: always
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+
+volumes:
+  db_data:
