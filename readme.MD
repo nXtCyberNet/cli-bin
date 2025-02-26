@@ -42,6 +42,65 @@ REDIS_PORT=6379
 SECRET_KEY=your_secret_key
 ```
 
+## CLI Usage
+
+A command-line interface (CLI) is available to interact with the API.
+
+### Installation
+Ensure you have `click` and `requests` installed:
+```sh
+pip install click requests
+```
+
+Run the CLI script:
+```sh
+python cli.py <command> [options]
+```
+
+### Commands
+
+- **Login:**
+  ```sh
+  python cli.py login <username> <password>
+  ```
+  Saves authentication token and public key.
+
+- **Create Account:**
+  ```sh
+  python cli.py create-account <username> <password> <email>
+  ```
+  Registers a new user.
+
+- **Upload Snippet:**
+  ```sh
+  python cli.py upload "Your snippet content here" --private
+  ```
+  Uploads a new snippet (use `--private` for private pastes).
+
+- **Retrieve Snippet:**
+  ```sh
+  python cli.py get-snippet <snippet_id> --public-key <key>
+  ```
+  Fetches a snippet (include `--public-key` for private snippets).
+
+- **Delete Snippet:**
+  ```sh
+  python cli.py delete <snippet_id>
+  ```
+  Deletes a snippet.
+
+- **List Snippets:**
+  ```sh
+  python cli.py list
+  ```
+  Lists all snippets (public and private).
+
+- **Logout:**
+  ```sh
+  python cli.py logout
+  ```
+  Removes authentication token.
+
 ## Other Details
 
 - The API runs on `http://localhost:5000`.
@@ -51,4 +110,5 @@ SECRET_KEY=your_secret_key
 ---
 
 For further configurations, modify `config.py` or update `docker-compose.yml` as needed.
+
 
