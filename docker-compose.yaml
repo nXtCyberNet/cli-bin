@@ -30,6 +30,8 @@ services:
       interval: 10s
       retries: 5
       start_period: 5s
+    ports:
+      - "5432:5432"  # Forward PostgreSQL port
 
   redis:
     image: redis:latest
@@ -39,6 +41,8 @@ services:
       interval: 10s
       retries: 5
       start_period: 5s
+    ports:
+      - "6379:6379"  # Forward Redis port
 
 volumes:
   db_data:
