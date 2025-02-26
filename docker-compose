@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    image: your-backend-image:latest  # Replace with actual image name
+    image: nxtcybernet127/cli-bin:latest  # Replace with actual image name
     ports:
       - "5000:5000"
     environment:
