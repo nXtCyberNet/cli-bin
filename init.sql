@@ -1,4 +1,8 @@
-CREATE TABLE signin (
+-- Verify the current database
+SELECT current_database();
+
+-- Create signin table
+CREATE TABLE IF NOT EXISTS signin (
     id SERIAL PRIMARY KEY,
     username VARCHAR(255) UNIQUE NOT NULL,
     password TEXT NOT NULL,
@@ -6,7 +10,8 @@ CREATE TABLE signin (
     login_token UUID UNIQUE NOT NULL
 );
 
-CREATE TABLE snippets (
+-- Create snippets table
+CREATE TABLE IF NOT EXISTS snippets (
     id SERIAL PRIMARY KEY,
     snippet_id VARCHAR(10) UNIQUE NOT NULL,
     snippet TEXT NOT NULL,
