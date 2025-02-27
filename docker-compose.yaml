@@ -25,6 +25,7 @@ services:
       POSTGRES_PASSWORD: secret
     volumes:
       - db_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount SQL file
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U admin -d pastebin -h db"]
       interval: 10s
