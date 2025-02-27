@@ -10,6 +10,20 @@ A simple API-based code snippet manager built with Flask, PostgreSQL, and Redis 
 - **Redis** (for session management and caching)
 - **Dockerized** (Docker Compose for easy deployment)
 
+## Backend System Architecture
+
+Below is the architecture diagram of the backend system:
+
+![Backend Architecture](architecture.png)
+
+![Backend Architecture](path/to/your/image.png)
+
+The system consists of the following components:
+- **Flask API**: The backend server handling requests and responses.
+- **PostgreSQL Database**: Stores user accounts and code snippets.
+- **Redis Cache**: Manages authentication sessions and caching.
+- **Dockerized Containers**: Ensures portability and easy deployment.
+
 ## Running with Docker Compose
 
 1. Clone the repository:
