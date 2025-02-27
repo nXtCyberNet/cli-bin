@@ -1,38 +1,23 @@
 version: '3.8'
 
 services:
-  backend:
-    image: nxtcybernet127/cli-bin:latest  # Ensure this image exists
-    ports:
-      - "5000:5000"
-    environment:
-      - POSTGRES_DB=pastebin
-      - POSTGRES_USER=admin
-      - POSTGRES_PASSWORD=secret
-      - POSTGRES_HOST=db  # Explicit database host
-    depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-
   db:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: pastebin
+      POSTGRES_DB: snippets  # Ensures the database is created
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: secret
     volumes:
       - db_data:/var/lib/postgresql/data
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Mount SQL file
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql  # Ensure SQL script runs
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin -d pastebin -h db"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d snippets -h db"]
       interval: 10s
       retries: 5
       start_period: 5s
     ports:
-      - "5432:5432"  # Forward PostgreSQL port
+      - "5432:5432"
 
   redis:
     image: redis:latest
@@ -43,7 +28,7 @@ services:
       retries: 5
       start_period: 5s
     ports:
-      - "6379:6379"  # Forward Redis port
+      - "6379:6379"
 
 volumes:
   db_data:
